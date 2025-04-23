@@ -1,7 +1,7 @@
 # FROM node as builder
 # WORKDIR /app
 # COPY package*.json ./
-# RUN npm ci
+# RUN npm install
 # COPY . .
 # RUN npx tsc
 
@@ -21,8 +21,9 @@
 FROM node:slim
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --production
+RUN npm install
 COPY . .
+RUN npx tsc
 ENV NODE_ENV=production
 ENV host_api=0.0.0.0
 ENV port_api=3000
